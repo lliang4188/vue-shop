@@ -13,6 +13,7 @@ export default {
 }
 </script>
 
-<style>
-    @import "./assets/css/common/public.css";
+<style lang="scss">
+    $fontUrl: './assets/font';
+    @import "./assets/css/common/public";
 </style>

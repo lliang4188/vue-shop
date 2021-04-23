@@ -4,7 +4,7 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 let router=new Router({
-    mode:"history",//1、hash哈希：有#号。2、history历史：没有#号
+    mode:"hash",//1、hash哈希：有#号。2、history历史：没有#号
     base:process.env.BASE_URL, //自动获取根目录路径
     scrollBehavior:(to,from,position)=>{
         if(position){
@@ -16,24 +16,30 @@ let router=new Router({
     routes:[
         {
             path:"/",
-            name:"index",
-            component:()=>import("./pages/home/index"),//路由懒加载解决首屏加载慢，性能优化
-            meta:{keepAlive:true}
-        },
-        {
-            path:"/news",
-            name:"news",
-            component:()=>import("./pages/home/news")
-        },
-        {
-            path:"/news/details/:id/:title",
-            name:"news-details",
-            component:()=>import("./pages/home/news/details")
-        },
-        {
-            path:"/news/article",
-            name:"news-article",
-            component:()=>import("./pages/home/news/article")
+            name:"home",
+            component:()=>import("./pages/home/main/index"),//路由懒加载解决首屏加载慢，性能优化
+            meta:{keepAlive:false},
+            redirect: '/index',
+            children: [
+                {
+                    path: 'index',
+                    name:'index',
+                    component:()=> import('./pages/home/index'),
+                    meta:{keepAlive:true}
+                },
+                {
+                    path: 'cart',
+                    name:'cart',
+                    component:()=> import('./pages/home/cart'),
+                    meta:{keepAlive:false}
+                },
+                {
+                    path: 'my',
+                    name: 'my',
+                    component:()=> import('./pages/user/ucenter'),
+                    meta:{keepAlive:false}
+                }
+            ]
         },
         {
             path:"/login",

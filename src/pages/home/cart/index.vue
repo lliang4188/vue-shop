@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <div>我的</div>
-    </div>
+    <div>购物车</div>
 </template>
 
 <script>
-
+  export default {
+    name: "index"
+  }
 </script>
 
 <style scoped>

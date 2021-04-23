@@ -22,5 +22,6 @@ module.exports={
     },
     configureWebpack:{
         devtool: 'source-map' //配置开发者环境的sourceMap用于断点调试
+
     }
 };

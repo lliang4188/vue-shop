@@ -18,7 +18,7 @@
       </div>
     </div>
     <div v-show="aGoods.length <= 0" class="no-data">
-      <p class="text">没有相关商品！</p>
+      <p class="text">没有相关商品</p>
     </div>
   </div>
 </template>
@@ -34,9 +34,6 @@
     created(){
         this.cid = this.$route.query.cid ? this.$route.query.cid : '';
         this.init(this.cid)
-        // console.log(this.cid)
-
-
     },
     methods:{
         ...mapActions({
@@ -58,7 +55,7 @@
     },
     beforeRouteUpdate(to, from, next){
         this.init(to.query.cid)
-        this.myScroll.scrollTo(0,0,200)
+        // this.myScroll.scrollTo(0,0,200)
         next()
     },
 

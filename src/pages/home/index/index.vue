@@ -2,7 +2,7 @@
     <div class="page">
         <header :class="{header:true, scroll:isScrollTop}" ref="header">
             <a class="icon-classify" @click="pushPage('/goods/classify')"></a>
-            <div class="search-wrap"><span class="text">请输入宝贝名称</span></div>
+            <div class="search-wrap" @click="searchShow.show=true"><span class="text">请输入宝贝名称</span></div>
             <a class="icon-my"></a>
         </header>
         <div class="banner-wrap">
@@ -102,21 +102,27 @@
                 </div>
             </div>
         </div>
+        <search-component :show="searchShow" ></search-component>
     </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex'
     import Swiper from '../../../assets/js/lib/swiper/swiper'
+    import SearchComponent from '../../../components/search'
     export default {
       name: "index",
         data(){
             return {
-              isScrollTop:false
+              isScrollTop:false,
+              searchShow: {
+                show: false
+              }
             }
         },
-
-
+        components:{
+          SearchComponent
+        },
         created(){
             this.isScroll = true
             this.startTop = 0

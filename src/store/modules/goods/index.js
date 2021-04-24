@@ -53,6 +53,8 @@ export default {
           if (payload.success) {
             payload.success()
           }
+        } else {
+          conText.commit('SET_GOODS', { aGoods: []})
         }
       })
 

@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <header :class="{header:true, scroll:isScrollTop}" ref="header">
-            <a class="icon-classify"></a>
+            <a class="icon-classify" @click="pushPage('/goods/classify')"></a>
             <div class="search-wrap"><span class="text">请输入宝贝名称</span></div>
             <a class="icon-my"></a>
         </header>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div :class="'goods-main goods-main-'+index" v-else>
+            <div :class="'goods-main goods-main-'+index" :key="index"  v-else>
                 <h2 class="title-main">—— {{item.title}} ——</h2>
                 <div class="goods-row-1">
                     <div class="goods-column" v-for="(item2, index2) in item.items.slice(0,2)" :key="index2">
@@ -191,7 +191,10 @@
               }
 
             }
-          }
+          },
+          pushPage(url){
+            this.$router.push(url)
+          },
         },
 
         destroyed(){
@@ -214,5 +217,5 @@
 
 <style lang="scss" scoped>
     @import "../../../assets/css/common/swiper.css";
-    @import "../../../assets/css/home/index/index";
+    @import "src/assets/css/home/index/index";
 </style>

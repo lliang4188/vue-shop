@@ -19,6 +19,10 @@
     },
     created(){
       this.changeNav(this.$route.name)
+      document.title = this.$route.meta.title
+    },
+    mounted(){
+
     },
     methods:{
       goPage(url){
@@ -42,11 +46,13 @@
       }
     },
     beforeRouteUpdate(to, from, next) {
+      document.title=to.meta.title;
       this.changeNav(to.name)
       next()
     },
     activated(){
       this.changeNav(this.$route.name)
+      document.title = this.$route.meta.title
     }
   }
 </script>

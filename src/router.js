@@ -25,19 +25,19 @@ let router=new Router({
                     path: 'index',
                     name:'index',
                     component:()=> import('./pages/home/index'),
-                    meta:{keepAlive:true}
+                    meta:{keepAlive:true, title: 'Vue商城'}
                 },
                 {
                     path: 'cart',
                     name:'cart',
                     component:()=> import('./pages/home/cart'),
-                    meta:{keepAlive:false}
+                    meta:{keepAlive:false, title:'购物车'}
                 },
                 {
                     path: 'my',
                     name: 'my',
                     component:()=> import('./pages/user/ucenter'),
-                    meta:{keepAlive:false}
+                    meta:{keepAlive:false, title:'个人中心'}
                 }
             ]
         },
@@ -85,9 +85,18 @@ let router=new Router({
             ]
         },
         {
-            path:"/classify",
+            path:"/goods/classify",
             name:"classify",
-            component:()=>import("./pages/home/classify")
+            component:()=>import("./pages/home/goods/classify"),
+            redirect: '/goods/classify/item',
+            children: [
+                {
+                    path: 'item',
+                    name: 'goods-classify-item',
+                    component:()=> import("./pages/home/goods/classify_item"),
+                    meta: {title:'商品分类'}
+                }
+            ]
         },
         {
             path:"/skip",

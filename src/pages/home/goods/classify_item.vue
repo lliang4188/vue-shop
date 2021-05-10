@@ -25,7 +25,7 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
-  import Iscroll from '../../../assets/js/lib/iscroll';
+  import Iscroll from '../../../assets/js/lib/iscroll'
   export default {
     name: "goods-classify-item",
     data(){

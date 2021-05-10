@@ -2,7 +2,7 @@
     <div class="page">
         <div class="search-header">
             <a class="btn-back" @click="goBack"></a>
-            <div class="search-wrap">请输入宝贝名称</div>
+            <div class="search-wrap" @click="searchShow.show=true">请输入宝贝名称</div>
         </div>
         <div class="goods-main">
             <div class="classify-nav" ref="classify-scroll">
@@ -15,16 +15,25 @@
                 <router-view></router-view>
             </div>
         </div>
+        <search-component :show="searchShow" ></search-component>
     </div>
 </template>
 
 <script>
-  import {mapActions, mapState, mapMutations} from 'vuex';
+  import {mapActions, mapState, mapMutations} from 'vuex'
+  import SearchComponent from '../../../components/search'
   import Iscroll from '../../../assets/js/lib/iscroll'
   export default {
     name: "classify",
+    components:{
+        SearchComponent
+    },
     data(){
-      return {}
+      return {
+        searchShow: {
+          show: false
+        }
+      }
     },
     created(){
       this.cid = this.$route.query.cid ? this.$route.query.cid : '';

@@ -15,7 +15,7 @@
         <a class="btn-delete" @click="clearHistory()"></a>
       </div>
       <div class="search-list">
-        <div class="item" v-for="(item, index) in historyKeywords" :key="index">
+        <div class="item" v-for="(item, index) in historyKeywords" :key="index" @click="goSearch(item)">
           <span class="inner">{{ item }}</span>
         </div>
       </div>
@@ -49,6 +49,10 @@
     props:{
       show:{
         type:Object
+      },
+      isLocal: {
+        type: Boolean,
+        default: false
       }
     },
     created(){
@@ -73,6 +77,10 @@
       // 搜索按钮事件
       goSearch(keyword){
         let tmpKeyword = keyword || this.keyword || ''
+        if (tmpKeyword === this.$route.query.keyword) {
+           this.show.show = false
+           return
+        }
         if(tmpKeyword){
           if(this.keywords.length > 0){
             for(let i=0; i<this.keywords.length; i++){
@@ -83,9 +91,14 @@
           }
           this.keywords.unshift(tmpKeyword)
           this.SET_KEYWORDS({historyKeywords:this.keywords})
-          console.log(this.historyKeywords)
         }
 
+        this.show.show = false
+        if (this.isLocal) {
+          this.$router.replace('/goods/search?keyword='+ tmpKeyword)
+        } else {
+          this.$router.push('/goods/search?keyword='+ tmpKeyword)
+        }
       },
       // 清除历史记录
       clearHistory(){

@@ -62,29 +62,6 @@ let router=new Router({
             // }
         },
         {
-            path:"/goods",
-            name:"goods",
-            component:()=>import("./pages/home/goods"),
-            redirect:"/goods/item",//页面重定向
-            children:[
-                {
-                    path:"item",
-                    name:"goods-item",
-                    component:()=>import("./pages/home/goods/item")
-                },
-                {
-                    path:"details",
-                    name:"goods-details",
-                    component:()=>import("./pages/home/goods/details")
-                },
-                {
-                    path:"review",
-                    name:"goods-review",
-                    component:()=>import("./pages/home/goods/review")
-                }
-            ]
-        },
-        {
             path:"/goods/classify",
             name:"classify",
             component:()=>import("./pages/home/goods/classify"),
@@ -103,6 +80,16 @@ let router=new Router({
             name:"skip",
             component:()=>import("./pages/skip")
         },
+        {
+            path: '/goods/search',
+            name: 'goods-search',
+            component:()=> import("./pages/home/goods/search")
+        },
+        {
+            path: '/goods/details',
+            name: 'goods-details',
+            component:() => import("./pages/home/goods/details")
+        }
     ]
 });
 // router.beforeEach((to,from,next)=>{
@@ -117,4 +104,5 @@ let router=new Router({
 //         next();
 //     }
 // });
+
 export default router;

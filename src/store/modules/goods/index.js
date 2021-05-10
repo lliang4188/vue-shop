@@ -38,7 +38,7 @@ export default {
             res.data[i].active=false;
           }
           conText.commit('SET_CLASSIFY',{classify:res.data});
-          if(payload.success){
+          if(payload && payload.success){
             payload.success();
           }
         }

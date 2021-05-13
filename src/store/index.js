@@ -4,15 +4,17 @@ import user from "./modules/user"
 import index from "./modules/index"
 import goods from "./modules/goods"
 import search from "./modules/search"
+import goodsReview from "./modules/goods/review"
 Vue.use(Vuex);
 
-let store=new Vuex.Store({
-    modules:{
-        index,
-        user,
-        goods,
-        search
-    }
-});
+let store = new Vuex.Store({
+  modules: {
+    index,
+    user,
+    goods,
+    search,
+    goodsReview,
+  },
+})
 
 export default store;

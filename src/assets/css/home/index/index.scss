@@ -78,16 +78,18 @@
 }
 
 .banner-wrap{
-  height: 3.66rem;
-  .swiper-container{
-    height: 100%;
+
+  .van-swipe-item{
+    height: 3.66rem;
   }
+
   img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
+
 }
 
 .nav-quick{

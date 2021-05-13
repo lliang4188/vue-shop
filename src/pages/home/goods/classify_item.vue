@@ -4,7 +4,7 @@
       <div class="list-item" v-for="(item, index) in aGoods" :key="index">
         <h2 class="title">{{ item.title }}</h2>
         <div class="list-inner">
-          <div class="item" v-for="(item2, index2) in item.goods" :key="index2">
+          <div class="item" v-for="(item2, index2) in item.goods" :key="index2" @click="$router.push('/goods/details?gid='+ item2.gid)">
             <div class="image">
               <img
                 src="../../../assets/images/common/grey.jpg"

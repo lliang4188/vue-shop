@@ -38,7 +38,7 @@
     </div>
     <div class="goods-list">
       <template v-if="searchData.length > 0">
-        <div class="list-item" v-for="(item, index) in searchData" :key="index">
+        <div class="list-item" v-for="(item, index) in searchData" :key="index" @click="$router.push('/goods/details?gid=' + item.gid )">
           <div class="pic-wrap">
             <img
               src="../../../assets/images/common/grey.jpg"

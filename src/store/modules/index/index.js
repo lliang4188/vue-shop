@@ -41,7 +41,7 @@ export default {
             getBannerData().then(res =>{
                 if (res.code === 200){
                     conText.commit("SET_BANNERS",{banners:res.data})
-                    if(payload.success){
+                    if(payload && payload.success){
                         payload.success()
                     }
 

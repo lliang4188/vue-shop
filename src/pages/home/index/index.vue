@@ -6,16 +6,11 @@
             <a class="icon-my"></a>
         </header>
         <div class="banner-wrap">
-            <div class="swiper-container" ref="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="(item,index) in banners" :key="index">
-                        <a :href="item.webs"> <img :src="item.image"  :alt="item.title"></a>
-                    </div>
-
-                </div>
-                <div class="swiper-pagination" ref="swiper-pagination"></div>
-            </div>
-
+            <van-swipe :autoplay="3000">
+              <van-swipe-item v-for="(item, index) in banners" :key="index">
+                <img v-lazy="item.image" />
+              </van-swipe-item>
+            </van-swipe>
         </div>
         <nav class="nav-quick" ref="nav-quick">
             <a class="item" v-for="item in navs" :key="item.cid">
@@ -27,7 +22,7 @@
             <div :class="'goods-main goods-main-'+index" :key="index" v-if="(index+1)%2 !==0">
                 <h2 class="title-main">—— {{item.title}} ——</h2>
                 <div class="goods-row-1">
-                    <div class="goods-column">
+                    <div class="goods-column" @click="$router.push('/goods/details?gid=' + (item.items && item.items[0].gid))">
                         <div class="goods-ones">
                             <h4 class="goods-title">{{item.items && item.items[0].title}}</h4>
                             <p class="goods-info-wrap"><span class="goods-tip">精品打折</span><span class="goods-price">{{ item.items && item.items[0].price }}元</span></p>
@@ -37,7 +32,7 @@
                         </div>
                     </div>
                     <div class="goods-column">
-                        <div class="goods-list" v-for="(item2, index2) in item.items.slice(1, 3)" :key="index2">
+                        <div class="goods-list" v-for="(item2, index2) in item.items.slice(1, 3)" :key="index2" @click="$router.push('/goods/details?gid='+ item2.gid)">
                             <div class="list-info">
                                 <h4 class="goods-title">{{item2.title}}</h4>
                                 <p class="list-tips">品质精挑</p>
@@ -50,7 +45,7 @@
                     </div>
                 </div>
                 <div class="goods-row-2">
-                    <div class="goods-list" v-for="(item2, index2) in item.items.slice(3, 7)" :key="index2">
+                    <div class="goods-list" v-for="(item2, index2) in item.items.slice(3, 7)" :key="index2" @click="$router.push('/goods/details?gid='+ item2.gid)" >
                         <h4 class="goods-title">{{item2.title}}</h4>
                         <div class="list-image">
                             <img src="../../../assets/images/common/grey.jpg" :data-echo="item2.image"  :alt="item2.title">
@@ -63,7 +58,7 @@
             <div :class="'goods-main goods-main-'+index" :key="index"  v-else>
                 <h2 class="title-main">—— {{item.title}} ——</h2>
                 <div class="goods-row-1">
-                    <div class="goods-column" v-for="(item2, index2) in item.items.slice(0,2)" :key="index2">
+                    <div class="goods-column" v-for="(item2, index2) in item.items.slice(0,2)" :key="index2" @click="$router.push('/goods/details?gid='+ item2.gid)">
                         <div class="goods-ones">
                             <h4 class="goods-title">{{item2.title}}</h4>
                             <p class="goods-info-wrap"><span class="goods-tip">精品打折</span></p>
@@ -74,7 +69,7 @@
                     </div>
                 </div>
                 <div class="goods-row-2">
-                    <div class="goods-list" v-for="(item2, index2) in item.items.slice(2, 6)" :key="index2">
+                    <div class="goods-list" v-for="(item2, index2) in item.items.slice(2, 6)" :key="index2" @click="$router.push('/goods/details?gid='+ item2.gid)">
                         <h4 class="goods-title">{{item2.title}}</h4>
                         <div class="list-image">
                             <img src="../../../assets/images/common/grey.jpg" :data-echo="item2.image"  :alt="item2.title">
@@ -91,7 +86,7 @@
                 <h2 class="title-text">为您推荐</h2>
             </div>
             <div class="recommend-list">
-                <div class="list-item" v-for="(item, index) in rmGoods" :key="index">
+                <div class="list-item" v-for="(item, index) in rmGoods" :key="index" @click="$router.push('/goods/details?gid='+ item.gid)">
                     <div class="inner">
                         <div class="goods-image">
                             <img src="../../../assets/images/common/grey.jpg" :data-echo="item.image" :alt="item.title">
@@ -107,9 +102,14 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import { mapActions, mapState } from 'vuex'
-    import Swiper from '../../../assets/js/lib/swiper/swiper'
     import SearchComponent from '../../../components/search'
+    import { Swipe, SwipeItem, Lazyload } from 'vant'
+
+    Vue.use(Swipe)
+    Vue.use(SwipeItem)
+    Vue.use(Lazyload)
     export default {
       name: "index",
         data(){
@@ -132,15 +132,7 @@
               this.startTop = $nav.offsetTop - $header.clientHeight
               window.addEventListener('scroll',this.eventScrollTop)
             })
-            this.getBanners({success:()=>{
-                this.$nextTick(()=>{
-                  new Swiper (this.$refs['swiper-container'], {
-                    autoplay:1000,
-                    pagination: this.$refs['swiper-pagination'],
-                    autoplayDisableOnInteraction:false
-                  })
-                })
-              }})
+            this.getBanners()
             this.getNavs({
               success:()=>{
                 this.$nextTick(()=>{
@@ -222,6 +214,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../../../assets/css/common/swiper.css";
     @import "src/assets/css/home/index/index";
 </style>

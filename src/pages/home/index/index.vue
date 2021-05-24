@@ -51,7 +51,7 @@
                             <img src="../../../assets/images/common/grey.jpg" :data-echo="item2.image"  :alt="item2.title">
                         </div>
                         <p class="price">&yen;{{item2.price}}</p>
-                        <p class="org-price">&yen;{{item2.price * 2}}</p>
+                        <p class="org-price">&yen;{{(item2.price * 1.6).toFixed(2)}}</p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                             <img src="../../../assets/images/common/grey.jpg" :data-echo="item2.image"  :alt="item2.title">
                         </div>
                         <p class="price">&yen;{{item2.price}}</p>
-                        <p class="org-price">&yen;{{item2.price * 2}}</p>
+                        <p class="org-price">&yen;{{ (item2.price * 1.5).toFixed(2)}}</p>
                     </div>
                 </div>
             </div>
@@ -127,9 +127,6 @@
             this.isScroll = true
             this.startTop = 0
             this.$nextTick(()=>{
-              const $nav = this.$refs['nav-quick'],
-                  $header = this.$refs['header'];
-              this.startTop = $nav.offsetTop - $header.clientHeight
               window.addEventListener('scroll',this.eventScrollTop)
             })
             this.getBanners()
@@ -176,6 +173,10 @@
           }),
           eventScrollTop(){
             let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+             const $nav = this.$refs['nav-quick'],
+                  $header = this.$refs['header'];
+
+            this.startTop = $nav.offsetTop - $header.clientHeight
             if(scrollTop >= this.startTop){
               if (this.isScroll) {
                 this.isScroll = false

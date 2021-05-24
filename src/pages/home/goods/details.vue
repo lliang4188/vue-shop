@@ -7,8 +7,8 @@
                 <div :class="{'nav-item':true, active:itemState===2}" @click="$router.replace('/goods/details/content?gid=' + gid)"><span class="text">详情</span></div>
                 <div :class="{'nav-item':true, active:itemState===3}" @click="$router.replace('/goods/details/review?gid=' + gid)"><span class="text">评价</span></div>
             </div>
-            <div class="icon-cart" id="icon-cart">
-                <span class="spot"></span>
+            <div class="icon-cart" id="icon-cart" @click="$router.push('/cart?from=goods_details')">
+                <span class="spot" v-if="$store.state.cart.cartData.length>0"></span>
             </div>
 
        </div>

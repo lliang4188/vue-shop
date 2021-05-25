@@ -2,18 +2,20 @@
     <div class="page-login">
        <sub-header :title="headerName"></sub-header>
        <div class="login-main">
-           <div class="login-item">
-               <input type="tel" placeholder="手机号" v-model="cellphone">
-           </div>
-           <div class="login-item login-password">
-               <input :type="isOpen ? 'text' : 'password'" placeholder="密码" autocomplete="true" v-model="password">
-               <span :class="isOpen ? 'eyes open': 'eyes'" @click="eye()"></span>
-           </div>
-           <button type="button" class="btn-login" @click="doLogin()">登录</button>
-           <div class="other-info">
-               <span class="btn-other">忘记密码</span>
-               <span class="btn-other">立即注册</span>
-           </div>
+           <form>
+                <div class="login-item">
+                    <input type="tel" placeholder="手机号" v-model="cellphone">
+                </div>
+                <div class="login-item login-password">
+                    <input :type="isOpen ? 'text' : 'password'" placeholder="密码" autocomplete="true" v-model="password">
+                    <span :class="isOpen ? 'eyes open': 'eyes'" @click="eye()"></span>
+                </div>
+                <button type="button" class="btn-login" @click="doLogin()">登录</button>
+                <div class="other-info">
+                    <span class="btn-other">忘记密码</span>
+                    <span class="btn-other" @click="$router.push('/reg')">立即注册</span>
+                </div>
+           </form>
        </div>
     </div>
 </template>
@@ -65,22 +67,16 @@
                 this.login({cellphone:this.cellphone,password:this.password,success:(res)=>{
                         // console.log(res);
                         if (res.code===200){
-                            this.$router.go(-1)
+                            if (this.$route.query.from === 'reg') {
+                                this.$router.go(-3)
+                            } else {
+                                this.$router.go(-1)
+                            }
+
                         } else{
                             Toast(res.data)
                         }
                     }});
-                // request(process.env.VUE_APP_API+"/home/user/pwdlogin?token=1ec949a15fb709370f","post",{cellphone:this.username,password:this.password}).then(res=>{
-                //     // console.log(res);
-                //     if (res.code===200){
-                //         localStorage['uid']=res.data.uid;
-                //         localStorage['nickname']=res.data.nickname;
-                //         localStorage['isLogin']=true;
-                //         this.$router.go(-1);
-                //     } else{
-                //         alert(res.data);
-                //     }
-                // })
             }
         }
     }

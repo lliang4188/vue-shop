@@ -61,7 +61,7 @@ let modules={
         //安全退出
         outLogin(conText){
             safeOutLoginData({uid:conText.state.uid}).then(res=>{
-                // console.log(res);
+                console.log(res);
             });
             conText.commit("OUT_LOGIN");
         },

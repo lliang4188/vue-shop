@@ -3,7 +3,11 @@
         <header :class="{header:true, scroll:isScrollTop}" ref="header">
             <a class="icon-classify" @click="pushPage('/goods/classify')"></a>
             <div class="search-wrap" @click="searchShow.show=true"><span class="text">请输入宝贝名称</span></div>
-            <a class="icon-my"></a>
+
+            <!-- 已登录 -->
+            <a class="icon-my" v-if="isLogin" @click="$router.push('/my')"></a>
+             <!-- 未登录 -->
+            <a class="login" @click="$router.push('/login')" v-else>登录</a>
         </header>
         <div class="banner-wrap">
             <van-swipe :autoplay="3000">
@@ -161,7 +165,8 @@
           banners:(state)=> state.index.banners,
           navs:(state)=> state.index.navs,
           goods:(state)=> state.index.goods,
-          rmGoods:(state) => state.index.rmGoods
+          rmGoods:(state) => state.index.rmGoods,
+          isLogin: state => state.user.isLogin
         })
       },
         methods:{

@@ -1,41 +1,73 @@
 <template>
-    <div>
-        用户名：<input type="text" v-model="username" placeholder="请输入用户名" /><br>
-        密码：<input type="text" placeholder="请输入密码" v-model="password" /><br>
-        <button type="button" @click="doLogin()">登录</button>
+    <div class="page-login">
+       <sub-header :title="headerName"></sub-header>
+       <div class="login-main">
+           <div class="login-item">
+               <input type="tel" placeholder="手机号" v-model="cellphone">
+           </div>
+           <div class="login-item login-password">
+               <input :type="isOpen ? 'text' : 'password'" placeholder="密码" autocomplete="true" v-model="password">
+               <span :class="isOpen ? 'eyes open': 'eyes'" @click="eye()"></span>
+           </div>
+           <button type="button" class="btn-login" @click="doLogin()">登录</button>
+           <div class="other-info">
+               <span class="btn-other">忘记密码</span>
+               <span class="btn-other">立即注册</span>
+           </div>
+       </div>
     </div>
 </template>
 
 <script>
-    // import {request} from '../../assets/js/utils/request';
-    import {mapActions} from "vuex";
+    import Vue from 'vue'
+    import { Toast } from 'vant'
+    import SubHeader from '@/components/sub-header'
+    import { mapActions } from 'vuex'
+    Vue.use({
+        Toast
+     })
     export default {
         name: "login",
+
         data(){
             return {
-                username:"",
-                password:""
+                headerName: '会员登录',
+                isOpen: false,
+                cellphone: '',
+                password: ''
             }
+        },
+        components: {
+            SubHeader
         },
         methods:{
             ...mapActions({
                 login:"user/login"
             }),
+            eye() {
+             this.isOpen = !this.isOpen
+            },
             doLogin(){
-                if (this.username.match(/^\s*$/)){
-                    alert("请输入用户名");
-                    return;
+                if (this.cellphone.match(/^\s*$/)){
+                    Toast('请输入手机号')
+                    return
                 }
+
+               if (!this.cellphone.match(/^1[3|4|5|7|8]\d{9}$/)) {
+                   Toast('请输入正确的手机号')
+                   return
+               }
+
                 if (this.password.match(/^\s*$/)){
-                    alert("请输入密码");
-                    return;
+                    Toast("请输入密码")
+                    return
                 }
-                this.login({cellphone:this.username,password:this.password,success:(res)=>{
+                this.login({cellphone:this.cellphone,password:this.password,success:(res)=>{
                         // console.log(res);
                         if (res.code===200){
                             this.$router.go(-1)
                         } else{
-                            alert(res.data);
+                            Toast(res.data)
                         }
                     }});
                 // request(process.env.VUE_APP_API+"/home/user/pwdlogin?token=1ec949a15fb709370f","post",{cellphone:this.username,password:this.password}).then(res=>{
@@ -54,6 +86,6 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    @import '@/assets/css/home/login/index.scss';
 </style>

@@ -5,7 +5,7 @@
             <div class="search-wrap" @click="searchShow.show=true"><span class="text">请输入宝贝名称</span></div>
 
             <!-- 已登录 -->
-            <a class="icon-my" v-if="isLogin" @click="$router.push('/my')"></a>
+            <a class="icon-my" v-if="isLogin" @click="$router.push('/ucenter')"></a>
              <!-- 未登录 -->
             <a class="login" @click="$router.push('/login')" v-else>登录</a>
         </header>

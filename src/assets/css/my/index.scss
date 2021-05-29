@@ -1,0 +1,130 @@
+.page-ucenter{
+  padding-top: 1rem;
+  padding-bottom: 1.2rem;
+}
+.ucenter-head {
+  background-color: #e51b19;
+  padding: .4rem .3rem;
+  display: flex;
+  position: relative;
+  &::before{
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    left: 0;
+    top:0;
+    background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,0));
+    content: '';
+  }
+  .head {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #fff;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 0.3rem;
+    img{
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+    }
+  }
+
+  .info-wrap{
+    flex: 1;
+    height: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0.28rem;
+    color: #fff;
+    line-height: 0.5rem;
+  }
+
+}
+.order-head{
+  height: .8rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.28rem;
+  padding: 0 0.3rem;
+  color: #666;
+  .order-title{
+    font-size: 0.28rem;
+    font-weight: normal;
+    color: #333;
+  }
+}
+
+.order-menu{
+  margin-top: 1px;
+  padding: 0.3rem 0;
+  background-color: #fff;
+  display: flex;
+  text-align: center;
+  font-size: 0.24rem;
+  .menu-ele{
+    flex: 1;
+    &::before{
+      font-family: iconfont;
+      display: block;
+      margin:0 auto 0.1rem;
+      color: #e51b19;
+      font-size: 0.64rem;
+      content:'\e69f';
+    }
+    &:nth-child(2){
+      &::before{
+        content: '\e616';
+      }
+    }
+    &:nth-child(3){
+      &::before{
+        content: '\e609';
+      }
+    }
+  }
+}
+
+.menu-wrap{
+  margin-top: 0.3rem;
+  background-color: #fff;
+  padding-bottom: 0.4rem;
+  .btn-wrap{
+    margin-top:0.4rem;
+    padding: 0 0.3rem;
+  }
+  .btn{
+    width: 100%;
+    height: .8rem;
+    background-color: #e51b19;
+    border-radius: 4px;
+    font-size: 0.32rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.8rem;
+  }
+}
+.menu-list{
+
+  li {
+    height: 0.8rem;
+    padding: 0 .3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    font-size: 0.32rem;
+    &::after{
+      font-family: iconfont;
+      font-size: 0.32rem;
+      content: '\e606';
+      color: #999;
+    }
+  }
+}

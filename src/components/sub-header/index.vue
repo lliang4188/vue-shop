@@ -22,5 +22,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/css/common/sub-header";
+@import "@/assets/css/common/sub-header";
 </style>

@@ -4,7 +4,7 @@
         <div class="nav-bottom">
             <span :class="{item:true, active:isActive===0}" @click="goPage('/index')">首页</span>
             <span :class="{item:true, active:isActive===1}" @click="goPage('/cart')">购物车<i class="spot" v-if="$store.state.cart.cartData.length>0"></i></span>
-            <span :class="{item:true, active:isActive===2}" @click="goPage('/my')">我的</span>
+            <span :class="{item:true, active:isActive===2}" @click="goPage('/ucenter')">我的</span>
         </div>
     </div>
 </template>
@@ -36,7 +36,7 @@
           case 'cart':
             this.isActive = 1
             break
-          case 'my':
+          case 'ucenter':
             this.isActive = 2
             break
           default:

@@ -14,7 +14,7 @@ export default {
 
       if (state.cartData.length > 0) {
         for (let i = 0; i < state.cartData.length; i++) {
-          console.log(payload.cartData)
+          // console.log(payload.cartData)
           if (
             state.cartData[i].gid === payload.cartData.gid &&
             JSON.stringify(state.cartData[i].attrs) ===

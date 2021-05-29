@@ -46,7 +46,7 @@
               <span>合计：<strong>&yen; {{ total }}</strong></span>
             </div>
           </div>
-          <div :class="total > 0 ? 'btn' : 'btn disable'">结算</div>
+          <div :class="total > 0 ? 'btn' : 'btn disable'" @click="statement()" >结算</div>
         </div>
       </div>
     </div>
@@ -121,6 +121,11 @@
           this.isAllSelect = isChecked
         } else {
           this.isAllSelect = false
+        }
+      },
+      statement() {
+        if (this.total > 0) {
+          this.$router.push('/order')
         }
       }
     }

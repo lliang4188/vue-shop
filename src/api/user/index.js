@@ -34,3 +34,12 @@ export function isRegData (username) {
 export function regUserData (data) {
     return request(config.baseApi + '/home/user/reg?token=' + config.token, 'post', data)
 }
+
+// 获取会员信息
+export function getUserInfoData (uid) {
+    return request(
+      config.baseApi +
+        '/user/myinfo/userinfo/uid/'+ uid +'?token=' +
+        config.token
+    )
+}

@@ -82,9 +82,10 @@
               :class="{ val: true, active: item2.active }"
               v-for="(item2, index2) in item.values"
               :key="index2"
-              @click="SELECT_ATTR({ index: index, index2: index2 })"
-              >{{ item2.value }}</span
+              @click="SELECT_ATTR({index: index, index2: index2})"
             >
+              {{ item2.value }}
+            </span>
           </div>
         </div>
       </div>

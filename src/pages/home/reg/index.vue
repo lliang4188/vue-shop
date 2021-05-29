@@ -84,6 +84,7 @@
     },
     created (){
       this.timer = null
+      this.isSubmit = true
     },
     methods: {
       ...mapActions({
@@ -144,8 +145,9 @@
           Toast('两次输入密码不一致')
           return
         }
-
-        this.regUser({
+        if (this.isSubmit) {
+          this.isSubmit = false
+          this.regUser({
           cellphone: this.cellphone,
           password: this.password,
           vcode: this.vcode,
@@ -157,6 +159,8 @@
             }
           }
           })
+        }
+
       },
 
       // 获取短信验证码
@@ -215,5 +219,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/css/home/login/index.scss";
+@import "@/assets/css/login/index.scss";
 </style>

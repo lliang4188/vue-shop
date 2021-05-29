@@ -34,8 +34,8 @@ let router = new Router({
           meta: { keepAlive: false, title: '购物车' },
         },
         {
-          path: 'my',
-          name: 'my',
+          path: 'ucenter',
+          name: 'ucenter',
           component: () => import('./pages/user/ucenter'),
           meta: { keepAlive: false, title: '个人中心' },
         },
@@ -45,13 +45,13 @@ let router = new Router({
       path: '/login',
       name: 'login',
       component: () => import('./pages/home/login'),
-      meta: { keepAlive: false },
+      meta: { keepAlive: false, title: '用户登录' },
     },
     {
       path: '/reg',
       name: 'reg',
       component: () => import('./pages/home/reg'),
-      meta: { keepAlive: false },
+      meta: { keepAlive: false, title: '用户注册' },
     },
     {
       path: '/ucenter',
@@ -80,6 +80,30 @@ let router = new Router({
           meta: { title: '商品分类' },
         },
       ],
+    },
+    {
+      path: '/order',
+      name: 'oreder',
+      component: () => import('./pages/home/order'),
+      meta: { auth: true, title: '确认订单' },
+    },
+    {
+      path: '/address',
+      name: 'address-choose',
+      component: () => import('./pages/home/address/index'),
+      meta: { auth: true, title: '选择收货地址' },
+    },
+    {
+      path: '/address/add',
+      name: 'address-add',
+      component: () => import('./pages/home/address/add'),
+      meta: { auth: true, title: '添加收货地址' },
+    },
+    {
+      path: '/address/mod',
+      name: 'address-mod',
+      component: () => import('./pages/home/address/mod'),
+      meta: { auth: true, title: '修改收货地址' },
     },
     {
       path: '/skip',
@@ -116,17 +140,16 @@ let router = new Router({
     },
   ],
 })
-// router.beforeEach((to,from,next)=>{
-//     // console.log(to);
-//     if (to.meta.auth){
-//         if (Boolean(localStorage['isLogin'])){
-//             next();
-//         } else {
-//             next("/login");
-//         }
-//     } else {
-//         next();
-//     }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth) {
+    if (localStorage['isLogin']) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 
 export default router;

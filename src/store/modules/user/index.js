@@ -5,6 +5,7 @@ import {
   checkVCodeData,
   isRegData,
   regUserData,
+  getUserInfoData
 } from '../../../api/user'
 let modules = {
   namespaced: true,
@@ -13,6 +14,8 @@ let modules = {
     nickname: localStorage['nickname'] ? localStorage['nickname'] : '',
     isLogin: localStorage['isLogin'] ? Boolean(localStorage['isLogin']) : false,
     authToken: localStorage['authToken'] ? localStorage['authToken'] : '',
+    head: '',
+    points: 0
   },
   getters: {
     //有时候我们需要从 store 中的 state 中派生出一些状态，例如对列表进行过滤并计数
@@ -41,11 +44,19 @@ let modules = {
       state.nickname = ''
       state.isLogin = false
       state.authToken = ''
+      state.points = 0
+      state.head = ''
       localStorage.removeItem('uid')
       localStorage.removeItem('nickname')
       localStorage.removeItem('isLogin')
       localStorage.removeItem('authToken')
+      localStorage.removeItem('cartData')
     },
+    ['SET_USER_INFO'] (state, payload) {
+      state.head = payload.head
+      state.points = payload.points
+      state.nickname = payload.nickname
+    }
   },
   actions: {
     //会员登录
@@ -70,6 +81,7 @@ let modules = {
       safeOutLoginData({ uid: conText.state.uid }).then((res) => {
         console.log(res)
       })
+      conText.rootState.cart.cartData = []
       conText.commit('OUT_LOGIN')
     },
     //会员安全认证
@@ -79,8 +91,10 @@ let modules = {
         uid: conText.state.uid,
         auth_token: conText.state.authToken,
       }).then((res) => {
+        if (res.code !== 200) {
+          conText.commit('OUT_LOGIN')
+        }
         // console.log(res);
-        conText.commit('OUT_LOGIN')
         if (payload.success) {
           payload.success(res)
         }
@@ -98,13 +112,27 @@ let modules = {
         return res
       })
     },
-    regUser (conText, payload) {
-        regUserData(payload).then((res) => {
-            if (payload && payload.success) {
-                payload.success(res)
-            }
-        })
+    // 注册会员
+    regUser(conText, payload) {
+      regUserData(payload).then((res) => {
+        if (payload && payload.success) {
+          payload.success(res)
+        }
+      })
     },
+    // 获取用户信息
+    getUserInfo (conText) {
+      getUserInfoData(conText.state.uid).then(res => {
+        console.log(res)
+        if (res.code === 200) {
+          conText.commit('SET_USER_INFO', {
+            head: res.data.head,
+            points: res.data.points,
+            nickname: res.data.nickname
+          })
+        }
+      })
+    }
   },
 }
 export default modules

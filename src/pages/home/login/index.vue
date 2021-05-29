@@ -83,5 +83,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '@/assets/css/home/login/index.scss';
+    @import '@/assets/css/login/index.scss';
 </style>

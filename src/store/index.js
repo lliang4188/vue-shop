@@ -6,6 +6,7 @@ import goods from "./modules/goods"
 import search from "./modules/search"
 import goodsReview from "./modules/goods/review"
 import cart from "./modules/cart"
+import address from './modules/address'
 Vue.use(Vuex);
 
 let store = new Vuex.Store({
@@ -15,7 +16,8 @@ let store = new Vuex.Store({
     goods,
     search,
     goodsReview,
-    cart
+    cart,
+    address
   },
 })
 
